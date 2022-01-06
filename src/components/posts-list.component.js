@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Post = ({ post, deletePost }) => (
   <div className="my-box-1">
@@ -29,8 +30,9 @@ const PostsList = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    console.log(`${apiUrl}/posts/`);
     axios
-      .get("http://localhost:5000/posts/")
+      .get(`${apiUrl}/posts/`)
       .then((response) => {
         setPosts(response.data);
         // console.log(response.data);
@@ -42,7 +44,7 @@ const PostsList = () => {
 
   const deletePost = (id) => {
     axios
-      .delete("http://localhost:5000/posts/" + id)
+      .delete(`${apiUrl}/posts/` + id)
       .then((res) => {
         // console.log(res.data);
         setPosts(posts.filter((el) => el._id !== id));

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ const EditPost = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/posts/" + id)
+      .get(`${apiUrl}/posts/` + id)
       .then((response) => {
         setTitle(response.data.title);
         setContent(response.data.content);
@@ -38,7 +39,7 @@ const EditPost = () => {
     console.log(post);
 
     axios
-      .post("http://localhost:5000/posts/update/" + id, post)
+      .post(`${apiUrl}/posts/update/` + id, post)
       .then((res) => console.log(res.data));
 
     window.location = "/";

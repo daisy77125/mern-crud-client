@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -22,7 +23,7 @@ const CreatePost = () => {
     };
 
     console.log(post);
-    axios.post("http://localhost:5000/posts/add", post).then((res) => {
+    axios.post(`${apiUrl}/posts/add`, post).then((res) => {
       console.log(res.data);
       //window.location = "/";
     });
